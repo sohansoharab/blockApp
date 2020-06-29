@@ -1,0 +1,66 @@
+{% extends 'blockApp/base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+	<h1 class="h1">REGISTER HERE</h1>
+
+	<form class="form" method="POST">
+		{% csrf_token %}
+
+		<fieldset>
+			
+			{% for hidden in user_form.hidden_fields %}
+				{{ hidden }}
+			{% endfor %}
+
+			<legend>SIgn Up Here</legend>
+
+			{% for field in user_form.visible_fields %}
+				<div class="form-group row">
+					
+					<label class="col-sm-3" for="{{ field.id_for_label }}">
+					{{ field.label }}
+					</label>
+
+					{% render_field field class="form-control col-sm-9" %}
+
+					{% for error in field.errors %}
+						<div class="alert alert-danger col-sm-12 mt-4" role="alert">
+							<span class="help-block">
+								{{ error }}
+							</span>
+						</div>
+					{% endfor %}
+
+				</div>
+			{% endfor %}
+
+			{% for hidden in profile_form.hidden_fields%}
+				{{ hidden }}
+			{% endfor %}
+
+			<div class="form-group row">
+				
+				<label class="col-sm-3" for="{{ profile_form.age.label.id_for_label }}">
+					{{ profile_form.age.label }}
+				</label>
+
+				{% render_field profile_form.age class="form-control col-sm-9" %}
+
+				{% for error in profile_form.age.errors %}
+					<div class="alert alert-danger col-sm-12 mt-4">
+						<span class="help-block">
+							{{ error }}
+						</span>
+					</div>
+				{% endfor %}
+
+			</div>
+
+		</fieldset>
+
+		<input type="submit" value="Submit" class="btn btn-secondary">
+
+	</form>
+		
+{% endblock %}
