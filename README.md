@@ -4,7 +4,7 @@ to run this
 
 just clone the repository
 
-than install the requirements
+than install the requirements by "pip install -r requirements.txt"
 
 run "python manage.py runserver"
 
